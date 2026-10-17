@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100b1c">
+  <meta name="description" content="The official Netherlight SMP Minecraft server website.">
+  <title>Netherlight SMP</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0812;
+      --panel: #151020;
+      --panel-2: #1c152b;
+      --text: #f7f2ff;
+      --muted: #b9accd;
+      --purple: #a855f7;
+      --purple-light: #d8b4fe;
+      --border: rgba(216, 180, 254, .18);
+      --green: #86efac;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 50% -20%, rgba(126, 34, 206, .28), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    .wrap { width: min(1080px, calc(100% - 32px)); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(11, 8, 18, .88); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: .04em; text-decoration: none; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg, #7e22ce, #c084fc); box-shadow: 0 0 28px #a855f744; }
+    .nav-links { display: flex; align-items: center; gap: 18px; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: .93rem; }
+    .nav-links a:hover { color: var(--text); }
+    .button {
+      border: 1px solid var(--border); border-radius: 12px; padding: 11px 16px;
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      text-decoration: none; font-weight: 750; cursor: pointer; transition: transform .15s, filter .15s;
+    }
+    .button:hover { transform: translateY(-1px); filter: brightness(1.1); }
+    .primary { background: linear-gradient(135deg, #9333ea, #7c3aed); border-color: transparent; color: white; box-shadow: 0 8px 28px #7c3aed33; }
+    .secondary { background: #ffffff08; color: var(--text); }
+    .hero { text-align: center; padding: 82px 0 54px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; color: var(--purple-light); background: #a855f711; font-size: .82rem; font-weight: 700; }
+    h1 { margin: 20px 0 12px; font-size: clamp(2.5rem, 8vw, 5.4rem); line-height: 1.03; letter-spacing: -.055em; }
+    .gradient { background: linear-gradient(90deg, #f5d0fe, #c084fc, #a5b4fc); color: transparent; background-clip: text; -webkit-background-clip: text; }
+    .hero p { max-width: 650px; margin: 0 auto; color: var(--muted); font-size: 1.08rem; }
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 26px 0 28px; }
+    .server-box { width: min(540px, 100%); margin: 0 auto; padding: 17px; border: 1px solid var(--border); background: linear-gradient(135deg, #1d1530, #110d1b); border-radius: 18px; text-align: left; }
+    .server-label { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: .82rem; }
+    .ip-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+    .ip { overflow-wrap: anywhere; flex: 1; font-weight: 800; font-size: clamp(1rem, 3vw, 1.2rem); }
+    .small-button { border: 1px solid var(--border); background: #ffffff0b; color: var(--text); border-radius: 10px; padding: 9px 12px; cursor: pointer; font-weight: 700; }
+    .notice { min-height: 1.4em; color: var(--green); font-size: .85rem; margin-top: 7px; }
+    .edition-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
+    .pill { padding: 6px 11px; border-radius: 999px; background: #ffffff08; border: 1px solid var(--border); color: #e9d5ff; font-size: .82rem; }
+    section { padding: 48px 0; }
+    .section-heading { text-align: center; margin-bottom: 26px; }
+    h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); margin: 0 0 8px; letter-spacing: -.035em; }
+    .section-heading p { color: var(--muted); margin: 0 auto; max-width: 620px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .card { padding: 22px; border-radius: 18px; border: 1px solid var(--border); background: linear-gradient(145deg, #191226, #100c19); }
+    .card-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: #a855f71a; font-size: 1.35rem; margin-bottom: 15px; }
+    .card h3 { margin: 0 0 7px; }
+    .card p { color: var(--muted); margin: 0; font-size: .94rem; }
+    .account-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: stretch; }
+    .account-panel { padding: 24px; border: 1px solid var(--border); border-radius: 20px; background: var(--panel); }
+    .account-panel p { color: var(--muted); }
+    .google-button { width: 100%; background: #fff; color: #24212a; border-color: #e5e7eb; }
+    .google-g { font-size: 1.25rem; font-weight: 900; background: conic-gradient(from -45deg, #4285f4 0 25%, #34a853 0 50%, #fbbc05 0 75%, #ea4335 0); color: transparent; background-clip: text; -webkit-background-clip: text; }
+    .fine-print { font-size: .8rem; color: var(--muted); }
+    .account-status { margin-top: 12px; color: var(--purple-light); font-size: .9rem; min-height: 1.5em; }
+    .auth-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 4px; border: 1px solid var(--border); border-radius: 12px; background: #09070f77; margin: 16px 0; }
+    .auth-tab { border: 0; border-radius: 9px; padding: 10px; color: var(--muted); background: transparent; font: inherit; font-weight: 750; cursor: pointer; }
+    .auth-tab[aria-selected="true"] { background: #9333ea35; color: #f3e8ff; }
+    .auth-field { display: block; margin: 13px 0 6px; font-size: .88rem; font-weight: 700; }
+    .auth-input { width: 100%; padding: 12px 13px; border: 1px solid var(--border); border-radius: 11px; color: var(--text); background: #0b0812; font: inherit; }
+    .auth-input:focus { outline: 2px solid #a855f755; border-color: #c084fc; }
+    .hidden { display: none !important; }
+    .steps { padding-left: 20px; color: var(--muted); }
+    .steps li { padding: 5px 0; }
+    .callout { border: 1px solid #f59e0b44; background: #f59e0b0b; padding: 14px; border-radius: 12px; font-size: .9rem; color: #f3dfb3; }
+    footer { margin-top: 35px; border-top: 1px solid var(--border); padding: 25px 0 36px; color: var(--muted); font-size: .88rem; }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+    @media (max-width: 760px) {
+      .nav { padding: 12px 0; align-items: flex-start; }
+      .nav-links { justify-content: flex-end; flex-wrap: wrap; gap: 10px 13px; }
+      .nav-links a { font-size: .84rem; }
+      .nav-links .button { padding: 8px 10px; }
+      .hero { padding: 62px 0 35px; }
+      .grid { grid-template-columns: 1fr; }
+      .account-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 430px) {
+      .brand span:last-child { max-width: 95px; line-height: 1.1; }
+      .nav { gap: 8px; }
+      .nav-links { max-width: 205px; }
+      .hero p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="Netherlight SMP home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>NETHERLIGHT SMP</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#account">Account</a>
+        <a href="#community">Community</a>
+        <a class="button secondary" href="#account">Sign in</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="home">
+      <span class="eyebrow"><span aria-hidden="true">✦</span> YOUR NEXT ADVENTURE STARTS HERE</span>
+      <h1>Enter the <span class="gradient">Netherlight</span></h1>
+      <p>A place to build, explore, make friends, and write your own Minecraft story. Join the community and start your adventure.</p>
+      <div class="actions">
+        <a class="button primary" href="#join">🎮 Join the Server</a>
+        <a class="button secondary" href="https://discord.gg/HVAnfyqjBU" target="_blank" rel="noopener noreferrer">💬 Join Discord</a>
+      </div>
+
+      <div class="server-box" id="join">
+        <div class="server-label"><span>SERVER ADDRESS</span><span>Java &amp; Bedrock</span></div>
+        <div class="ip-row">
+          <div class="ip" id="server-ip">cairo-colon.tun.ply.gg</div>
+          <button class="small-button" id="copy-ip" type="button">Copy IP</button>
+        </div>
+        <div class="notice" id="copy-status" aria-live="polite"></div>
+        <div class="edition-row">
+          <span class="pill">☕ Java Edition</span>
+          <span class="pill">🟩 Bedrock Edition*</span>
+          <span class="pill">💜 Community SMP</span>
+        </div>
+        <p class="fine-print">*Bedrock may require a separate port. Confirm the correct port with your server configuration.</p>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Made for your next adventure</h2>
+          <p>Everything players need to get started and stay connected.</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">⚔️</div>
+            <h3>Your adventure</h3>
+            <p>Explore the world, build your base, and create your own story on Netherlight SMP.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🛡️</div>
+            <h3>Player accounts</h3>
+            <p>We plan to add secure Google sign-in and verified Minecraft account linking.</p>
+          </article>
+          <article class="card" id="community">
+            <div class="card-icon" aria-hidden="true">💬</div>
+            <h3>Join the community</h3>
+            <p>Meet other players, get updates, and chat with the community on Discord.</p>
+            <p style="margin-top:14px"><a class="button secondary" href="https://discord.gg/HVAnfyqjBU" target="_blank" rel="noopener noreferrer">Open Discord ↗</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="account">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Your Netherlight account</h2>
+          <p>Sign-in and Minecraft linking are being set up. This page is ready for the real authentication backend.</p>
+        </div>
+        <div class="account-layout">
+          <div class="account-panel">
+            <h3 id="auth-title">Welcome to Netherlight</h3>
+            <p id="auth-intro">Sign in to continue to your player account.</p>
+            <div class="auth-tabs" role="tablist" aria-label="Account action">
+              <button class="auth-tab" id="signin-tab" type="button" role="tab" aria-selected="true">Sign in</button>
+              <button class="auth-tab" id="signup-tab" type="button" role="tab" aria-selected="false">Create account</button>
+            </div>
+            <form id="email-form">
+              <div id="name-field" class="hidden">
+                <label class="auth-field" for="display-name">Player display name</label>
+                <input class="auth-input" id="display-name" name="display-name" autocomplete="nickname" maxlength="32" placeholder="Your name">
+              </div>
+              <label class="auth-field" for="email">Email address</label>
+              <input class="auth-input" id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+              <label class="auth-field" for="password">Password</label>
+              <input class="auth-input" id="password" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+              <button class="button primary" id="email-submit" type="submit" style="width:100%;margin-top:16px">Sign in</button>
+            </form>
+            <p style="text-align:center;color:var(--muted);margin:14px 0">— or —</p>
+            <button class="button google-button" id="google-sign-in" type="button">
+              <span class="google-g" aria-hidden="true">G</span> Continue with Google
+            </button>
+            <div class="account-status" id="auth-status" aria-live="polite">Account sign-in is not configured yet.</div>
+            <p class="fine-print">This is a starter interface. Firebase Authentication must be configured before real accounts or Google sign-in can work. No passwords are sent or stored by this demo.</p>
+          </div>
+          <div class="account-panel">
+            <h3>Link your Minecraft account</h3>
+            <p>After signing in, players will be able to link their Minecraft account by proving they control it in-game.</p>
+            <ol class="steps">
+              <li>Sign in to your website account.</li>
+              <li>Request a temporary verification code.</li>
+              <li>Join the server and enter the code in-game.</li>
+              <li>The server verifies the link and updates your profile.</li>
+            </ol>
+            <div class="callout">Security note: the final system needs a backend and a Minecraft plugin. A username-only form is not proof of account ownership.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Netherlight SMP</span>
+      <span>Made for the community 💜</span>
+    </div>
+  </footer>
+
+  <script>
+    const copyButton = document.getElementById('copy-ip');
+    const copyStatus = document.getElementById('copy-status');
+    const serverIp = document.getElementById('server-ip').textContent.trim();
+
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(serverIp);
+        copyStatus.textContent = 'Server IP copied!';
+      } catch {
+        const field = document.createElement('textarea');
+        field.value = serverIp;
+        field.setAttribute('readonly', '');
+        field.style.position = 'absolute';
+        field.style.left = '-9999px';
+        document.body.appendChild(field);
+        field.select();
+        const copied = document.execCommand('copy');
+        field.remove();
+        copyStatus.textContent = copied ? 'Server IP copied!' : 'Copy failed. Please copy the IP manually.';
+      }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    let authMode = 'signin';
+    const signinTab = document.getElementById('signin-tab');
+    const signupTab = document.getElementById('signup-tab');
+    const nameField = document.getElementById('name-field');
+    const displayName = document.getElementById('display-name');
+    const password = document.getElementById('password');
+    const emailSubmit = document.getElementById('email-submit');
+    const authTitle = document.getElementById('auth-title');
+    const authIntro = document.getElementById('auth-intro');
+    const authStatus = document.getElementById('auth-status');
+
+    function setAuthMode(nextMode) {
+      authMode = nextMode;
+      const isSignup = authMode === 'signup';
+      signinTab.setAttribute('aria-selected', String(!isSignup));
+      signupTab.setAttribute('aria-selected', String(isSignup));
+      nameField.classList.toggle('hidden', !isSignup);
+      displayName.required = isSignup;
+      password.autocomplete = isSignup ? 'new-password' : 'current-password';
+      emailSubmit.textContent = isSignup ? 'Create account' : 'Sign in';
+      authTitle.textContent = isSignup ? 'Create your account' : 'Welcome to Netherlight';
+      authIntro.textContent = isSignup ? 'Create an account to join the community.' : 'Sign in to continue to your player account.';
+      authStatus.textContent = '';
+    }
+
+    signinTab.addEventListener('click', () => setAuthMode('signin'));
+    signupTab.addEventListener('click', () => setAuthMode('signup'));
+    document.getElementById('email-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      authStatus.textContent = 'Authentication is not configured yet. No account was created and no details were sent. Configure Firebase Authentication to enable this feature.';
+    });
+    document.getElementById('google-sign-in').addEventListener('click', () => {
+      authStatus.textContent = 'Google sign-in is not configured yet. Configure Firebase Authentication before using real accounts.';
+    });
+  </script>
+</body>
+</html>
